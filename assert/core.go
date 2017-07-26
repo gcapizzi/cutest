@@ -7,14 +7,10 @@ type Result struct {
 
 type Matcher func(actual interface{}) Result
 
-func That(actual interface{}, matcher Matcher) Result {
-	return matcher(actual)
-}
+func That(actual interface{}, matcher Matcher) {
+	result := matcher(actual)
 
-func (result Result) AndThat(actual interface{}, matcher Matcher) Result {
-	if result.Success {
-		return matcher(actual)
+	if !result.Success {
+		panic(result.Reason)
 	}
-
-	return result
 }

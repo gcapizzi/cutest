@@ -7,10 +7,10 @@ import . "github.com/gcapizzi/cutest/assert/matchers"
 
 func TestHelloWorld(t *testing.T) {
 	testCases := []test.Case{
-		func() assert.Result {
-			return assert.That(true, Is(true)).
-				AndThat(1, Is(2))
-		},
+		test.NewCase(func() {
+			assert.That(true, Is(true))
+			assert.That(42, Is(42))
+		}),
 	}
 
 	testSuite := test.NewSuite(testCases)
